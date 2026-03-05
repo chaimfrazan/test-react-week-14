@@ -6,11 +6,12 @@ import SearchBar from '../components/SearchBar'
 import '../App.css'
 
 function Home() {
-    const { movies, setMovies, selectSeat, seatSelections, searchQuery } = useStore()
+    const { movies, setMovies, setLoading, searchQuery } = useStore()
 
     useEffect(() => async () => {
         const res = await getMovies()
         setMovies(res.data.data)
+        setLoading(false)
     }, [])
     
     const filtered = movies?.filter(movie => movie.Title.includes(searchQuery))
